@@ -1,0 +1,20 @@
+<html>
+  <body>
+    <p id='server-time'></p>
+    <script>
+      var HOST = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(HOST);
+      var el = document.getElementById('server-time');
+
+      ws.onmessage = function (event) {
+        el.innerHTML = 'recieve data : ' + event.data;
+      };
+	  
+	  window.onload = function() {
+		setTimeout(function() {
+			ws.send('This is client message.');
+		}, 1000);
+	  }
+    </script>
+  </body>
+</html>
